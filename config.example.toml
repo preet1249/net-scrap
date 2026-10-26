@@ -1,0 +1,45 @@
+# webaudit example configuration.  Usage:  python -m webaudit scan --config config.example.toml --confirm-authorized
+#
+# NEVER put passwords, cookies, tokens or MFA codes here (such keys are rejected). Log in manually in the browser window.
+
+initial_url = "https://app.example.com/dashboard"   # must be https:// (http only for localhost with allow_http_local)
+# confirm_authorized = true   # prefer passing --confirm-authorized on the command line each time
+# allow_http_local = false    # true only for local development targets (localhost / 127.0.0.1 / ::1)
+
+# Exact additional origins (scheme://host[:port]); nothing is inferred from redirects, links or CORS headers.
+extra_allowed_origins = []
+
+# Regexes matched against path?query; matches are never visited/clicked.
+# (defaults already exclude logout, delete, billing, invite ... ; list here only to override the defaults)
+# exclude_patterns = ["logout", "delete", "checkout"]
+
+output_dir = "output"
+profile_dir = ".profiles/default"     # dedicated automation profile; never your everyday browser profile
+headless = false                      # manual login needs a visible window
+queue_size = 10000                    # bounded event queue; overflow is counted and reported, never silent
+scope_enforcement = "guard"           # "guard": block off-scope navigations/redirects + internal targets (disables HTTP cache)
+                                      # "observe": no interception; escapes can only be detected afterwards
+block_unsafe_methods = true           # guard blocks POST/PUT/PATCH/DELETE after login (coverage gap is reported)
+allow_unsafe_method_paths = []        # e.g. ["/graphql", "/rest/v1/rpc/"] for READ-ONLY query endpoints you reviewed
+interaction_mode = "read_only"        # "read_write": scraper creates/edits test-marked data inside the logged-in account (deny-listed, capped)
+# write_deny_patterns = []             # extra regexes (path[?query]) that must never be written to
+manual_approval = false               # true: ask before clicking controls that cannot be classified as read-only
+log_level = "INFO"
+
+[crawl]
+max_depth = 3
+max_pages = 50
+max_seconds = 600
+max_requests = 5000
+max_pages_per_pattern = 5             # e.g. /users/{id} is visited at most this many times
+request_delay_ms = 250
+page_timeout_ms = 30000
+settle_ms = 800
+max_interactions_per_page = 10
+
+[body]
+mode = "none"                         # none | selected (API/JS/HTML text) | all_supported (all text types); binaries never stored
+max_body_bytes = 262144               # per body, in BYTES; larger bodies are truncated and marked
+max_total_bytes = 20000000
+per_origin_bytes = 5000000
+store_raw = false                     # EXPLICIT opt-in: also writes unredacted bodies to <scan>/bodies_raw/ (local, sensitive!)

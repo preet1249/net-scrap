@@ -1,0 +1,3 @@
+var config = { apiKey: '[REDACTED:33chars]', awsKey: '[REDACTED:4chars]IOSFODNN7EXAMPLE', publicFlag: true };
+var t = '[REDACTED:67chars]';
+//# sourceMappingURL=leaky.js.map

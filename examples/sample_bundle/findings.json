@@ -1,0 +1,538 @@
+[
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-026d0f80",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (aws_access_key_id)",
+    "severity": "high",
+    "confidence": "medium",
+    "status": "heuristic",
+    "description": "A aws_access_key_id pattern matched in a application/javascript response body (Script).",
+    "evidence_references": [
+      "request:cdp-1/10752.11#0",
+      "body:body-000002",
+      "event:evt-41"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "\u2026[short]",
+    "location": "http://127.0.0.1:55489/leaky.js line 1 offset 69"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-4f1f6cbc",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (aws_access_key_id)",
+    "severity": "high",
+    "confidence": "medium",
+    "status": "heuristic",
+    "description": "A aws_access_key_id pattern matched in a application/json response body (Fetch).",
+    "evidence_references": [
+      "request:cdp-1/10752.13#0",
+      "body:body-000003",
+      "event:evt-79"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "\u2026[short]",
+    "location": "http://127.0.0.1:55489/api/sensitive line 1 offset 194"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-76d33d77",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (stripe_secret_key)",
+    "severity": "high",
+    "confidence": "medium",
+    "status": "heuristic",
+    "description": "A stripe_secret_key pattern matched in a application/json response body (Fetch).",
+    "evidence_references": [
+      "request:cdp-1/10752.13#0",
+      "body:body-000003",
+      "event:evt-79"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "sk\u2026[33 chars]",
+    "location": "http://127.0.0.1:55489/api/sensitive line 1 offset 150"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-ecbb9171",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (stripe_secret_key)",
+    "severity": "high",
+    "confidence": "medium",
+    "status": "heuristic",
+    "description": "A stripe_secret_key pattern matched in a application/javascript response body (Script).",
+    "evidence_references": [
+      "request:cdp-1/10752.11#0",
+      "body:body-000002",
+      "event:evt-41"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "sk\u2026[33 chars]",
+    "location": "http://127.0.0.1:55489/leaky.js line 1 offset 24"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-COOKIE-HTTPONLY-243b6310",
+    "rule_id": "COOKIE-HTTPONLY",
+    "title": "Session-like cookie without HttpOnly",
+    "severity": "medium",
+    "confidence": "medium",
+    "status": "heuristic",
+    "description": "Cookie name(s) sid set by http://127.0.0.1:55489 (values redacted).",
+    "evidence_references": [
+      "request:cdp-1/C4B8856239C89406115317ABA7CC23A4#0"
+    ],
+    "impact": "Script running on the page (e.g., via XSS) can read the cookie.",
+    "limitations": "Based on Set-Cookie headers visible to the browser instrumentation; cookie purpose is inferred from its name (HttpOnly relevance is a heuristic).",
+    "remediation": "Set Secure, HttpOnly (for session cookies) and an explicit SameSite attribute.",
+    "verification_steps": [
+      "Inspect the cookie in DevTools > Application > Cookies and confirm which cookie carries the session."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-CORS-REFLECT-CREDS-e88f8674",
+    "rule_id": "CORS-REFLECT-CREDS",
+    "title": "Cross-origin response echoes the request Origin with credentials allowed",
+    "severity": "medium",
+    "confidence": "low",
+    "status": "heuristic",
+    "description": "Request Origin http://127.0.0.1:55489 was echoed in ACAO by http://localhost:55490 together with ACAC true (actual response, preflight (OPTIONS)). This is expected for an allowlisted trusted origin and risky if the server reflects ANY origin.",
+    "evidence_references": [
+      "request:cdp-1/22FFA0AF5DF5A21858E1230D7A75764F#0",
+      "request:cdp-1/10752.15#0",
+      "request:cdp-1/10752.17#0"
+    ],
+    "impact": "If origin reflection is unconditional, any website could read authenticated responses from this endpoint.",
+    "limitations": "One observation from the browser origin(s) used during the scan. It cannot show how the server treats other Origin values unless they were actually sent, and CORS only governs what browsers expose to scripts; it does not authenticate callers. Only the origin(s) actually sent were observed: http://127.0.0.1:55489. Reflection of arbitrary origins is UNTESTED.",
+    "remediation": "Validate Origin against an exact allowlist; never reflect arbitrary values with credentials.",
+    "verification_steps": [
+      "In an authorized test, request the endpoint with a controlled unrelated Origin header and check whether ACAO echoes it with ACAC true."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-DEBUG-1a6c451e",
+    "rule_id": "EXP-DEBUG",
+    "title": "Debug or diagnostic information in responses",
+    "severity": "medium",
+    "confidence": "low",
+    "status": "heuristic",
+    "description": "Response bodies contained indicators: debug_flag, python_traceback.",
+    "evidence_references": [
+      "request:cdp-1/10752.13#0",
+      "body:body-000003"
+    ],
+    "impact": "Stack traces and internal paths aid attackers and can disclose implementation details.",
+    "limitations": "Regex indicators (matched text not retained) can match benign content such as documentation or client bundles.",
+    "remediation": "Disable verbose errors in production and return generic error bodies.",
+    "verification_steps": [],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-0ca54ecc",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (generic_assigned_secret)",
+    "severity": "medium",
+    "confidence": "low",
+    "status": "heuristic",
+    "description": "A generic_assigned_secret pattern matched in a application/javascript response body (Script).",
+    "evidence_references": [
+      "request:cdp-1/10752.11#0",
+      "body:body-000002",
+      "event:evt-41"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "sk\u2026[33 chars]",
+    "location": "http://127.0.0.1:55489/leaky.js line 1 offset 15"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-18f3400c",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (generic_assigned_secret)",
+    "severity": "medium",
+    "confidence": "low",
+    "status": "heuristic",
+    "description": "A generic_assigned_secret pattern matched in a application/json response body (Fetch).",
+    "evidence_references": [
+      "request:cdp-1/10752.13#0",
+      "body:body-000003",
+      "event:evt-79"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "hu\u2026[24 chars]",
+    "location": "http://127.0.0.1:55489/api/sensitive line 1 offset 99"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-24957b56",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (generic_assigned_secret)",
+    "severity": "medium",
+    "confidence": "low",
+    "status": "heuristic",
+    "description": "A generic_assigned_secret pattern matched in a application/json response body (Fetch).",
+    "evidence_references": [
+      "request:cdp-1/10752.13#0",
+      "body:body-000003",
+      "event:evt-79"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "sk\u2026[33 chars]",
+    "location": "http://127.0.0.1:55489/api/sensitive line 1 offset 139"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-be3bc9d0",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (jwt)",
+    "severity": "medium",
+    "confidence": "low",
+    "status": "heuristic",
+    "description": "A jwt pattern matched in a application/json response body (Fetch).",
+    "evidence_references": [
+      "request:cdp-1/10752.13#0",
+      "body:body-000003",
+      "event:evt-79"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "ey\u2026[67 chars]",
+    "location": "http://127.0.0.1:55489/api/sensitive line 1 offset 227"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SECRET-f7615c95",
+    "rule_id": "EXP-SECRET",
+    "title": "Secret-looking value in client-visible response (jwt)",
+    "severity": "medium",
+    "confidence": "low",
+    "status": "heuristic",
+    "description": "A jwt pattern matched in a application/javascript response body (Script).",
+    "evidence_references": [
+      "request:cdp-1/10752.11#0",
+      "body:body-000002",
+      "event:evt-41"
+    ],
+    "impact": "If valid and sensitive, anyone who can load this resource obtains the credential.",
+    "limitations": "Pattern-based detection of a candidate secret in a captured body; it can be a public identifier, a test/placeholder value or a false positive, and validity was NOT checked. The value is deliberately not shown.",
+    "remediation": "Rotate the credential if valid, remove it from client-delivered assets, and use server-side secrets or short-lived tokens.",
+    "verification_steps": [
+      "Locate the value in the original asset using the location below.",
+      "Determine whether it is a public identifier or a real secret, and rotate if secret."
+    ],
+    "redacted_sample": "ey\u2026[67 chars]",
+    "location": "http://127.0.0.1:55489/leaky.js line 2 offset 121"
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-HDR-CSP-MISSING-1132bc61",
+    "rule_id": "HDR-CSP-MISSING",
+    "title": "Content-Security-Policy not enforced",
+    "severity": "medium",
+    "confidence": "high",
+    "status": "observed",
+    "description": "2 of 4 HTML document response(s) from http://127.0.0.1:55489 lacked an enforced Content-Security-Policy header.",
+    "evidence_references": [
+      "request:cdp-1/4F10C79CE930CEA9D15173EC34FAC2FE#0",
+      "request:cdp-1/D954EB009F4834A1957AB74830F5584B#0"
+    ],
+    "impact": "Reduces defence-in-depth against XSS and data injection; absence alone is not a vulnerability.",
+    "limitations": "Evaluated on in-scope HTML document responses actually observed; other pages/routes may differ. A header set by a CDN/proxy only for some paths, or removed before the browser saw it, is outside what this check can establish. CSP delivered via <meta http-equiv> is not examined.",
+    "remediation": "Deploy a restrictive CSP (nonce/hash-based script-src, object-src 'none', base-uri 'self', frame-ancestors).",
+    "verification_steps": [
+      "Confirm in DevTools > Network that no CSP header exists on the document response."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-HDR-CSP-PERMISSIVE-b8d8e9ec",
+    "rule_id": "HDR-CSP-PERMISSIVE",
+    "title": "Content-Security-Policy has permissive script directives",
+    "severity": "medium",
+    "confidence": "high",
+    "status": "observed",
+    "description": "'unsafe-eval' allows eval-like APIs; 'unsafe-inline' allows inline scripts; broad script source 'data:'.",
+    "evidence_references": [
+      "request:cdp-1/C4B8856239C89406115317ABA7CC23A4#0"
+    ],
+    "impact": "A permissive script policy weakens CSP's ability to contain XSS.",
+    "limitations": "Policy semantics were evaluated statically; nonce-based policies and browser-specific fallbacks may behave differently.",
+    "remediation": "Remove 'unsafe-inline'/'unsafe-eval' and wildcard/scheme sources; use nonces or hashes.",
+    "verification_steps": [
+      "Review the full policy text in the evidence record and test with a CSP evaluator."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-HDR-FRAME-365a2dc8",
+    "rule_id": "HDR-FRAME",
+    "title": "No frame-protection policy observed (frame-ancestors / X-Frame-Options)",
+    "severity": "medium",
+    "confidence": "medium",
+    "status": "observed",
+    "description": "3 of 4 document response(s) had neither CSP frame-ancestors nor X-Frame-Options.",
+    "evidence_references": [
+      "request:cdp-1/4F10C79CE930CEA9D15173EC34FAC2FE#0",
+      "request:cdp-1/C4B8856239C89406115317ABA7CC23A4#0",
+      "request:cdp-1/D954EB009F4834A1957AB74830F5584B#0"
+    ],
+    "impact": "Pages may be embeddable by other origins, enabling clickjacking where sensitive actions exist.",
+    "limitations": "Evaluated on in-scope HTML document responses actually observed; other pages/routes may differ. A header set by a CDN/proxy only for some paths, or removed before the browser saw it, is outside what this check can establish. Impact depends on whether the page contains state-changing UI and relies on cookies for auth.",
+    "remediation": "Add 'Content-Security-Policy: frame-ancestors 'none'' (or 'self') and/or 'X-Frame-Options: DENY'.",
+    "verification_steps": [
+      "Attempt to embed an authenticated page in an iframe from a test origin you control."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-COOKIE-SAMESITE-6062e0f4",
+    "rule_id": "COOKIE-SAMESITE",
+    "title": "Cookie without explicit SameSite attribute",
+    "severity": "low",
+    "confidence": "high",
+    "status": "observed",
+    "description": "Cookie name(s) sid set by http://127.0.0.1:55489 (values redacted).",
+    "evidence_references": [
+      "request:cdp-1/C4B8856239C89406115317ABA7CC23A4#0"
+    ],
+    "impact": "Browsers default to Lax for such cookies; behaviour differs across browsers/versions.",
+    "limitations": "Based on Set-Cookie headers visible to the browser instrumentation; cookie purpose is inferred from its name.",
+    "remediation": "Set Secure, HttpOnly (for session cookies) and an explicit SameSite attribute.",
+    "verification_steps": [
+      "Inspect the cookie in DevTools > Application > Cookies and confirm which cookie carries the session."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-PII-fa031010",
+    "rule_id": "EXP-PII",
+    "title": "API response contains sensitive-looking fields",
+    "severity": "low",
+    "confidence": "low",
+    "status": "heuristic",
+    "description": "GET http://127.0.0.1:55489/api/sensitive returned JSON with field names suggesting personal or credential data: api_key, email, password, ssn, token.",
+    "evidence_references": [
+      "request:cdp-1/10752.13#0",
+      "body:body-000003"
+    ],
+    "impact": "Over-exposure of fields (data minimisation issue) or credential fields returned to clients.",
+    "limitations": "Based on key names only; values were redacted and never inspected. Returning a user's own data to that user may be intended. ",
+    "remediation": "Return only fields the client needs; never return credential/secret fields.",
+    "verification_steps": [
+      "Confirm each listed field is required by the UI and belongs to the authenticated user."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-EXP-SOURCEMAP-611dc9cf",
+    "rule_id": "EXP-SOURCEMAP",
+    "title": "Source map files are publicly retrievable",
+    "severity": "low",
+    "confidence": "high",
+    "status": "observed",
+    "description": "1 source map file(s) returned HTTP 2xx to the authenticated browser session.",
+    "evidence_references": [
+      "request:cdp-1/10752.14#0"
+    ],
+    "impact": "Source maps expose original source structure, comments and internal names, easing analysis of the application.",
+    "limitations": "Observed with the scanned session only; the maps may be restricted for anonymous users. Contents were not analysed unless body capture was enabled.",
+    "remediation": "Do not deploy source maps to production, or restrict them to authenticated developers.",
+    "verification_steps": [
+      "Request the .map URL without a session and compare."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-HDR-REFERRER-805abfb6",
+    "rule_id": "HDR-REFERRER",
+    "title": "Referrer-Policy may leak full URLs",
+    "severity": "low",
+    "confidence": "high",
+    "status": "observed",
+    "description": "Referrer-Policy permits sending full URLs cross-origin.",
+    "evidence_references": [
+      "request:cdp-1/C4B8856239C89406115317ABA7CC23A4#0"
+    ],
+    "impact": "",
+    "limitations": "Evaluated on in-scope HTML document responses actually observed; other pages/routes may differ. A header set by a CDN/proxy only for some paths, or removed before the browser saw it, is outside what this check can establish.",
+    "remediation": "Use 'strict-origin-when-cross-origin' or 'no-referrer'.",
+    "verification_steps": [],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-HDR-XCTO-76fa0e0c",
+    "rule_id": "HDR-XCTO",
+    "title": "X-Content-Type-Options: nosniff not observed",
+    "severity": "low",
+    "confidence": "high",
+    "status": "observed",
+    "description": "3 of 4 document response(s) lacked 'X-Content-Type-Options: nosniff'.",
+    "evidence_references": [
+      "request:cdp-1/4F10C79CE930CEA9D15173EC34FAC2FE#0",
+      "request:cdp-1/C4B8856239C89406115317ABA7CC23A4#0",
+      "request:cdp-1/D954EB009F4834A1957AB74830F5584B#0"
+    ],
+    "impact": "MIME-sniffing can reinterpret content types in older/edge cases.",
+    "limitations": "Evaluated on in-scope HTML document responses actually observed; other pages/routes may differ. A header set by a CDN/proxy only for some paths, or removed before the browser saw it, is outside what this check can establish.",
+    "remediation": "Send 'X-Content-Type-Options: nosniff' on all responses.",
+    "verification_steps": [],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-AUTHZ-CANDIDATE-2998b0f7",
+    "rule_id": "AUTHZ-CANDIDATE",
+    "title": "Object-identifier endpoint (authorization candidate): GET /api/users/{id}",
+    "severity": "info",
+    "confidence": "low",
+    "status": "untested_hypothesis",
+    "description": "GET http://127.0.0.1:55489/api/users/{id} takes an object identifier in its path and returned HTTP 200 to the scanned session (1 request(s)). Whether other users' objects are protected was NOT tested.",
+    "evidence_references": [
+      "request:cdp-1/10752.22#0"
+    ],
+    "impact": "If server-side ownership checks are missing, users could access other users' objects (IDOR/BOLA).",
+    "limitations": "Passive traffic cannot show an access-control weakness. This is a pointer for authorized manual testing with designated test accounts.",
+    "remediation": "Enforce object-level authorization server-side on every request.",
+    "verification_steps": [
+      "With two authorized test accounts you own, request account A's object using account B's session and expect 403/404.",
+      "Use only known test resources; do not enumerate real customers' records."
+    ],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-CORS-BLOCKED-2dee8817",
+    "rule_id": "CORS-BLOCKED",
+    "title": "Browser blocked cross-origin requests (CORS failures)",
+    "severity": "info",
+    "confidence": "high",
+    "status": "observed",
+    "description": "1 request(s) failed with a browser-generated CORS error (MissingAllowOriginHeader). This is the browser enforcing policy, not a server vulnerability.",
+    "evidence_references": [
+      "request:cdp-1/10752.18#0"
+    ],
+    "impact": "",
+    "limitations": "A failure here may mean the application is broken for this origin rather than insecure.",
+    "remediation": "If these calls are intended, add the required CORS headers; otherwise remove the calls.",
+    "verification_steps": [],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-HDR-BANNER-196e234a",
+    "rule_id": "HDR-BANNER",
+    "title": "Server technology/version disclosure headers",
+    "severity": "info",
+    "confidence": "high",
+    "status": "observed",
+    "description": "Headers disclose technology/version information: Python/3.13 aiohttp/3.13.2.",
+    "evidence_references": [
+      "request:cdp-1/4F10C79CE930CEA9D15173EC34FAC2FE#0",
+      "request:cdp-1/10752.11#0",
+      "request:cdp-1/10752.13#0",
+      "request:cdp-1/10752.14#0",
+      "request:cdp-1/10752.15#0"
+    ],
+    "impact": "",
+    "limitations": "Disclosure is informational; it aids fingerprinting but is not itself exploitable.",
+    "remediation": "Remove or generalize Server/X-Powered-By headers.",
+    "verification_steps": [],
+    "redacted_sample": null,
+    "location": null
+  },
+  {
+    "schema_version": "1.0",
+    "finding_id": "F-HDR-NOTLS-698a8914",
+    "rule_id": "HDR-NOTLS",
+    "title": "Document served over HTTP",
+    "severity": "info",
+    "confidence": "high",
+    "status": "observed",
+    "description": "http://127.0.0.1:55489 served HTML documents without TLS; HSTS is not applicable.",
+    "evidence_references": [
+      "request:cdp-1/4F10C79CE930CEA9D15173EC34FAC2FE#0",
+      "request:cdp-1/C04BA6C84E478FC7B7CEF8073D71B97A#0",
+      "request:cdp-1/C4B8856239C89406115317ABA7CC23A4#0",
+      "request:cdp-1/D954EB009F4834A1957AB74830F5584B#0"
+    ],
+    "impact": "",
+    "limitations": "Local development origins are expected to use HTTP.",
+    "remediation": "Serve the application over HTTPS only and redirect HTTP to HTTPS.",
+    "verification_steps": [],
+    "redacted_sample": null,
+    "location": null
+  }
+]

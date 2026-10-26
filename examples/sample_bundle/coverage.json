@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "allowed_origins": [
+    "http://127.0.0.1:55489",
+    "http://localhost:55490"
+  ],
+  "crawl": {
+    "pages_total_recorded": 4,
+    "by_navigation_status": {
+      "ok": 4
+    },
+    "skipped": {},
+    "budgets_hit": [],
+    "budgets": {
+      "max_depth": 2,
+      "max_pages": 10,
+      "max_seconds": 600,
+      "max_requests": 100000,
+      "max_pages_per_pattern": 5
+    },
+    "errors": [],
+    "errors_count": 0,
+    "page_timeouts": 0,
+    "interaction_mode": "read_only",
+    "writes_performed": 0,
+    "write_actions": [],
+    "write_test_marker_prefix": null,
+    "read_back_pages": [],
+    "test_files_available": [],
+    "session_lost": false,
+    "interactions": {},
+    "popups_observed": [],
+    "dialogs_dismissed": 0,
+    "requests_observed_cdp": 13,
+    "scope_guard_blocks": [],
+    "url_patterns": {
+      "http://127.0.0.1:55489/sec": 1,
+      "http://127.0.0.1:55489/h/good": 1,
+      "http://127.0.0.1:55489/h/bad": 1,
+      "http://127.0.0.1:55489/users/{id}": 1
+    },
+    "elapsed_s": 6.34,
+    "note": "Discovery is best-effort: routes reachable only via unsafe/uncertain controls, forms, or deep state are NOT covered.",
+    "write_readback": {
+      "write_requests": {
+        "observed": 0,
+        "completed": 0,
+        "http_error": 0,
+        "failed_or_aborted": 0,
+        "requests": []
+      },
+      "file_uploads_attempted": [],
+      "checked": false,
+      "note": "no automatic text writes with a marker were performed"
+    }
+  },
+  "collector_diagnostics": {
+    "cdp": {
+      "collector": "cdp-collector/1",
+      "protocol_version": "1.3",
+      "product": "HeadlessChrome/139.0.7258.5",
+      "sessions": [
+        {
+          "label": "cdp-1",
+          "target_id": "03B3B195C0F0F6479B160317285EED26",
+          "kind": "page",
+          "enabled": true,
+          "event_counts": {
+            "Network.loadingFinished": 13,
+            "Network.requestWillBeSent": 13,
+            "Network.requestWillBeSentExtraInfo": 12,
+            "Network.responseReceivedExtraInfo": 12,
+            "Network.responseReceived": 12,
+            "Network.loadingFailed": 1
+          }
+        }
+      ],
+      "failures": [],
+      "coverage_note": "Page/frame sessions only; workers, other targets and pre-attach requests are not covered."
+    },
+    "playwright": {
+      "collector": "playwright-collector/1",
+      "errors": [],
+      "pages_seen": 1,
+      "requests_seen": 18
+    },
+    "bodies": {
+      "mode": "selected",
+      "total_bytes": 1547,
+      "per_origin": {
+        "http://127.0.0.1:55489#static": 1067,
+        "http://127.0.0.1:55489#api": 452,
+        "http://localhost:55490#api": 28
+      },
+      "status_counts": {
+        "captured": 11,
+        "skipped_no_body_status": 1
+      },
+      "duplicates_skipped": 0,
+      "dedupe_policy": "static assets captured once per URL; API responses up to 5 per normalized endpoint"
+    },
+    "queue": {
+      "written": 122,
+      "errors": [],
+      "accepted": 122,
+      "dropped": 0,
+      "dropped_by_type": {},
+      "late_after_close": 0,
+      "max_queue_depth": 2,
+      "queue_maxsize": 10000
+    }
+  },
+  "correlation": {
+    "events": 122,
+    "requests": 14,
+    "evicted_incomplete": 0,
+    "orphan_extra_info": 0,
+    "late_after_eviction": 0,
+    "ambiguous": 0,
+    "ignored": 0
+  },
+  "incomplete_requests": 1,
+  "body_capture": {
+    "statuses": {
+      "captured": 11,
+      "skipped_no_body_status": 1
+    },
+    "request_body_statuses": {},
+    "unavailable_count": 0,
+    "unavailable_examples": [],
+    "capturer": {
+      "mode": "selected",
+      "total_bytes": 1547,
+      "per_origin": {
+        "http://127.0.0.1:55489#static": 1067,
+        "http://127.0.0.1:55489#api": 452,
+        "http://localhost:55490#api": 28
+      },
+      "status_counts": {
+        "captured": 11,
+        "skipped_no_body_status": 1
+      },
+      "duplicates_skipped": 0,
+      "dedupe_policy": "static assets captured once per URL; API responses up to 5 per normalized endpoint"
+    }
+  },
+  "unsupported_or_partial_targets": {
+    "cdp_sessions": 1,
+    "frames_without_own_session": 0,
+    "service_workers_reported": 0,
+    "late_attached_pages": 0,
+    "redirect_guard_unavailable": 0
+  },
+  "observed_channels": {
+    "websockets_cdp": 0,
+    "websockets_playwright": 0,
+    "popups": 0,
+    "pages_announced": 0,
+    "service_workers_reported": 0,
+    "not_instrumented": [
+      "dedicated workers",
+      "shared workers",
+      "service-worker own network traffic",
+      "browser-level targets other than attached pages/frames"
+    ]
+  },
+  "failures_by_class": {
+    "cors_blocked": {
+      "count": 1,
+      "meaning": "browser enforced CORS policy; not a server failure",
+      "examples": [
+        "http://localhost:55490/api/cors-nopolicy"
+      ]
+    }
+  },
+  "skipped_scope_origins": [],
+  "session_label": null,
+  "mode": "crawl",
+  "pages_failed_or_timeout": [],
+  "rule_errors": [],
+  "limitations": [
+    "Passive observation of browser-visible traffic only; the endpoint inventory is NOT a complete list of the application's endpoints.",
+    "CDP data is structured browser instrumentation, not a byte-for-byte packet capture.",
+    "Page/frame-level CDP sessions do not cover service/shared/dedicated workers; popups' earliest requests may be missed.",
+    "Redaction is best-effort pattern matching and is not guaranteed to remove every sensitive value.",
+    "Passive findings are indicators; authorization/access-control weaknesses cannot be proven without separate, authorized active testing.",
+    "Browser-side evidence cannot show server-side SQL, database policy decisions (e.g. Row Level Security) or backend authorization logic; use server/database audit logs or tracing, and tests with separate accounts you control.",
+    "Workflows are covered only if they were exercised: the crawler never performs writes; use a manual session to record login/logout, saves, uploads, etc.",
+    "Not instrumented: dedicated workers, shared workers, service-worker own network traffic, browser-level targets other than attached pages/frames."
+  ]
+}

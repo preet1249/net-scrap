@@ -1,0 +1,138 @@
+{
+  "manifest_version": "1.0",
+  "schema_version": "1.0",
+  "tool_version": "0.1.0",
+  "scan_id": "1127.0.0.1",
+  "completion_status": "completed",
+  "generated_at": "2026-10-26T19:42:22Z",
+  "files": {
+    "network_events.jsonl": {
+      "bytes": 117355,
+      "sha256": "8416a39f942ca3d87ea81dc73c0af6e46f043825878510c1247fce9bd2c73803",
+      "records": 122
+    },
+    "requests.jsonl": {
+      "bytes": 67505,
+      "sha256": "e6cb571fabb1d41ab5774966046b68a691491c7bb7273bc66d9d41d5b7f277f3",
+      "records": 14
+    },
+    "endpoints.jsonl": {
+      "bytes": 7430,
+      "sha256": "3898bb1a337086f83ff942f97bc50d456aa271dd8decd5cef6d5e0aa995c3518",
+      "records": 13
+    },
+    "pages.jsonl": {
+      "bytes": 1823,
+      "sha256": "6b9de344344198f636a7088625c01d088d28bd7a9fe4e31313f31a4f68858d8e",
+      "records": 4
+    },
+    "coverage.json": {
+      "bytes": 6314,
+      "sha256": "fc3f269d48615664fc84a32212cce3f4411de5af3457116f7d94b0fc3f0478a9"
+    },
+    "findings.json": {
+      "bytes": 27696,
+      "sha256": "b56a4783ec3600180a294179500992929c4cb45aa42c81f08fed6a433f49defb",
+      "records": 24
+    },
+    "scan_metadata.json": {
+      "bytes": 2390,
+      "sha256": "225b1336b4b4454e9eb682cc781dac51044236d243f9f4e439c7d6305ba76a50"
+    },
+    "report.md": {
+      "bytes": 29114,
+      "sha256": "7e58b686b072b3b7ec9ee2670441426939dbd53936b9b93169dc8bdd5394f153"
+    }
+  },
+  "body_artifacts": {
+    "bodies/body-000001.txt": {
+      "bytes": 502,
+      "sha256": "8e3c2fb9e642d6fc0bdc1a22f11a10b2ff1e1c3b8b72f39f60934f2eb79a5d1c"
+    },
+    "bodies/body-000002.txt": {
+      "bytes": 174,
+      "sha256": "bb0bb9bf91bed693418872be6c2456e57d10c05b5fe24df1dd705b64ef211049"
+    },
+    "bodies/body-000003.txt": {
+      "bytes": 312,
+      "sha256": "12d7ee9dc5ad1c27d9a0c439842b113fb431fc6c9ae238bf07325c78b0b6db95"
+    },
+    "bodies/body-000004.txt": {
+      "bytes": 57,
+      "sha256": "88f02fe8152d436ca07334249a49d6d692ead0ca971c6aab49bbe4baf8c68c94"
+    },
+    "bodies/body-000005.txt": {
+      "bytes": 8,
+      "sha256": "613fe5aa65343dbb1b9abe6abac6773f5c91bd60d3f2ffb7e2eae69e1db8b227"
+    },
+    "bodies/body-000006.txt": {
+      "bytes": 6,
+      "sha256": "a7a39b72f29718e653e73503210fbb597057b7a1c77d1fe321a1afcff041d4e1"
+    },
+    "bodies/body-000007.txt": {
+      "bytes": 14,
+      "sha256": "5320eeec0112a3cd00aa44266e4c18a04022b07d0ebf8e793b178e8c36822ea5"
+    },
+    "bodies/body-000008.txt": {
+      "bytes": 103,
+      "sha256": "89f99e87cc3106e505800774fd45fe3b8681a0b57d87f986ce95a3f7c3aae354"
+    },
+    "bodies/body-000009.txt": {
+      "bytes": 102,
+      "sha256": "5fc321723eb635742e6f7e4fe31eb815a1d1a8909cd194bf9c08b92104cf1958"
+    },
+    "bodies/body-000010.txt": {
+      "bytes": 135,
+      "sha256": "bb0f7e416ed39bc9621ccd4b4027d7706930b9967dd8afa8436eb19cf7930e00"
+    },
+    "bodies/body-000011.txt": {
+      "bytes": 25,
+      "sha256": "cf668ebdecad698272c1b585d99c77f382023c422c206e6cd0b386d548e0318e"
+    }
+  },
+  "capture_settings": {
+    "body": {
+      "mode": "selected",
+      "max_body_bytes": 262144,
+      "max_total_bytes": 20000000,
+      "per_origin_bytes": 5000000,
+      "store_raw": false,
+      "queue_size": 500
+    },
+    "scope_enforcement": "guard",
+    "block_unsafe_methods": true,
+    "crawl": {
+      "max_depth": 2,
+      "max_pages": 10,
+      "max_seconds": 600,
+      "max_requests": 100000,
+      "max_pages_per_pattern": 5,
+      "request_delay_ms": 0,
+      "page_timeout_ms": 30000,
+      "settle_ms": 400,
+      "max_interactions_per_page": 2,
+      "max_page_seconds": 240,
+      "scroll_steps": 4,
+      "max_writes": 20,
+      "max_writes_per_page": 3
+    }
+  },
+  "redaction": {
+    "headers": "sensitive header values replaced",
+    "urls": "sensitive query values replaced",
+    "bodies": "redacted by default",
+    "raw_bodies_exported": false,
+    "perfect": false
+  },
+  "collection_errors": [],
+  "coverage_limitations": [
+    "Passive observation of browser-visible traffic only; the endpoint inventory is NOT a complete list of the application's endpoints.",
+    "CDP data is structured browser instrumentation, not a byte-for-byte packet capture.",
+    "Page/frame-level CDP sessions do not cover service/shared/dedicated workers; popups' earliest requests may be missed.",
+    "Redaction is best-effort pattern matching and is not guaranteed to remove every sensitive value.",
+    "Passive findings are indicators; authorization/access-control weaknesses cannot be proven without separate, authorized active testing.",
+    "Browser-side evidence cannot show server-side SQL, database policy decisions (e.g. Row Level Security) or backend authorization logic; use server/database audit logs or tracing, and tests with separate accounts you control.",
+    "Workflows are covered only if they were exercised: the crawler never performs writes; use a manual session to record login/logout, saves, uploads, etc.",
+    "Not instrumented: dedicated workers, shared workers, service-worker own network traffic, browser-level targets other than attached pages/frames."
+  ]
+}
